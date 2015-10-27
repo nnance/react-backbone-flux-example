@@ -3,7 +3,6 @@ var Store = require('../shared/libs/Store');
 var conf = require('./settings');
 var constants = require('./constants');
 
-
 class RouterModel extends Store.Model {
     constructor() {
         super();
@@ -54,10 +53,6 @@ class AppRouter extends Backbone.Router {
                     params: []
                 });
             }
-        });
-
-        Backbone.$(document).on("ready", function() {
-            Backbone.history.start();
         });
     }
 

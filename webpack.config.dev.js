@@ -13,11 +13,15 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new webpack.IgnorePlugin(/^jquery$/),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [{
+      test: /backbone\.js$/,
+      loader: 'imports?define=>false'
+    },{
       test: /\.js$/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src')

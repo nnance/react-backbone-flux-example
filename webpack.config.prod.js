@@ -12,6 +12,7 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new webpack.IgnorePlugin(/^jquery$/),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -26,6 +27,9 @@ module.exports = {
   ],
   module: {
     loaders: [{
+      test: /backbone\.js$/,
+      loader: 'imports?define=>false'
+    },{
       test: /\.js$/,
       loaders: ['babel'],
       include: path.join(__dirname, 'src')
