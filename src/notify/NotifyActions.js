@@ -1,9 +1,9 @@
 var constants = require('./constants');
-var dispatch = require('../shared/helpers/dispatch');
+var Backbone = require('backbone');
 
 
 module.exports = {
     hide: function() {
-        dispatch(constants.NOTIFY_HIDE);
+        Backbone.trigger(constants.NOTIFY_HIDE);
     }
 };

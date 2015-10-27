@@ -1,8 +1,8 @@
 var constants = require('./constants');
-var Store = require('../shared/libs/Store');
+var Backbone = require('backbone');
 var FlickrConstants = require('../flickr/constants');
 
-class NotifyStore extends Store.Model {
+class NotifyStore extends Backbone.Model {
     constructor() {
         super();
         this.default = {
@@ -10,27 +10,26 @@ class NotifyStore extends Store.Model {
             visible: false,
             closable: true
         };
+        this.listenTo(Backbone, FlickrConstants.FLICKR_FIND, this.showLoading);
+        this.listenTo(Backbone, constants.NOTIFY_HIDE, this.hideNotification);
+        this.listenTo(Backbone, FlickrConstants.FLICKR_FIND_SUCCESS, this.hideNotification);
+        this.listenTo(Backbone, FlickrConstants.FLICKR_FIND_FAIL, this.showFailure);
     }
 
-    handleDispatch(payload) {
-        switch(payload.actionType) {
-            case FlickrConstants.FLICKR_FIND:
-                this.set({
-                    text: 'Loading...',
-                    visible: true,
-                    closable: false
-                });
-                break;
+    showLoading() {
+        this.set({
+            text: 'Loading...',
+            visible: true,
+            closable: false
+        });
+    }
 
-            case constants.NOTIFY_HIDE:
-            case FlickrConstants.FLICKR_FIND_SUCCESS:
-                this.set({ visible: false });
-                break;
+    hideNotification() {
+      this.set({ visible: false });
+    }
 
-            case FlickrConstants.FLICKR_FIND_FAIL:
-                this.alert('Loading failed... Please try again.');
-                break;
-        }
+    showFailure() {
+      this.alert('Loading failed... Please try again.');
     }
 
     alert(text) {

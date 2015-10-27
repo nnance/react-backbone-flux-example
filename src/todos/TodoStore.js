@@ -1,5 +1,4 @@
 var Backbone = require('backbone');
-var Store = require('../shared/libs/Store');
 var constants = require('./constants');
 
 
@@ -14,26 +13,25 @@ var Todo = Backbone.Model.extend({
 });
 
 
-class TodoCollection extends Store.Collection {
+class TodoCollection extends Backbone.Collection {
     constructor() {
         super();
         this.model = Todo;
+        this.listenTo(Backbone, constants.TODO_ADD, this.addTodo);
+        this.listenTo(Backbone, constants.TODO_TOGGLE, this.toggleTodo);
+        this.listenTo(Backbone, constants.TODO_REMOVE, this.removeTodo);
     }
 
-    handleDispatch(payload) {
-        switch(payload.actionType) {
-            case constants.TODO_ADD:
-                this.add({ text: payload.text });
-                break;
+    addTodo(action) {
+      this.add({text: action.text});
+    }
 
-            case constants.TODO_TOGGLE:
-                payload.todo.toggleComplete();
-                break;
+    toggleTodo(action) {
+      action.todo.toggleComplete();
+    }
 
-            case constants.TODO_REMOVE:
-                this.remove(payload.todo);
-                break;
-        }
+    removeTodo(action) {
+      this.remove(action.todo);
     }
 }
 

@@ -1,15 +1,14 @@
 var constants = require('./constants');
-var dispatch = require('../shared/helpers/dispatch');
-
+var Backbone =require('backbone');
 
 module.exports = {
     add: function(text) {
-        dispatch(constants.TODO_ADD, { text: text });
+        Backbone.trigger(constants.TODO_ADD, { text: text });
     },
     toggle: function(todo) {
-        dispatch(constants.TODO_TOGGLE, { todo: todo });
+        Backbone.trigger(constants.TODO_TOGGLE, { todo: todo });
     },
     remove: function(todo) {
-        dispatch(constants.TODO_REMOVE, { todo: todo });
+        Backbone.trigger(constants.TODO_REMOVE, { todo: todo });
     }
 };

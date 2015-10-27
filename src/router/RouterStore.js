@@ -1,9 +1,8 @@
 var Backbone = require('backbone');
-var Store = require('../shared/libs/Store');
 var conf = require('./settings');
 var constants = require('./constants');
 
-class RouterModel extends Store.Model {
+class RouterModel extends Backbone.Model {
     constructor() {
         super();
         this.defaults = {
@@ -15,18 +14,17 @@ class RouterModel extends Store.Model {
     initialize() {
         super.initialize();
         this._router = new AppRouter(this, conf.ROUTE_ROUTES);
+
+        this.listenTo(Backbone, constants.ROUTE_NAVIGATE, this.navigate);
     }
 
-    handleDispatch(payload) {
-        switch (payload.actionType) {
-            case constants.ROUTE_NAVIGATE:
-                this._router.navigate(payload.fragment, {
-                    trigger: payload.trigger,
-                    replace: payload.replace
-                });
-                break;
-        }
+    navigate(payload) {
+        this._router.navigate(payload.fragment, {
+            trigger: payload.trigger,
+            replace: payload.replace
+        });
     }
+
 }
 
 

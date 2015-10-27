@@ -1,5 +1,4 @@
 var Backbone = require('backbone');
-var Store = require('../shared/libs/Store');
 var constants = require('./constants');
 
 
@@ -10,19 +9,16 @@ var FlickrResult = Backbone.Model.extend({
 });
 
 
-class FlickrCollection extends Store.Collection {
+class FlickrCollection extends Backbone.Collection {
     constructor() {
         super();
         this.model = FlickrResult;
+        this.listenTo(Backbone, constants.FLICKR_FIND_SUCCESS, this.addItems);
     }
 
-    handleDispatch(payload) {
-        switch (payload.actionType) {
-            case constants.FLICKR_FIND_SUCCESS:
-                this.reset();
-                this.add(payload.items);
-                break;
-        }
+    addItems(action) {
+      this.reset();
+      this.add(action.items);
     }
 }
 
