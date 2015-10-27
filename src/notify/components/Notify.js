@@ -1,7 +1,7 @@
-var React = require('react');
-var storeMixin = require('../../shared/helpers/storeMixin');
-var NotifyStore = require('../NotifyStore');
-var NotifyActions = require('../NotifyActions');
+import React from 'react';
+import storeMixin from '../../shared/helpers/storeMixin';
+import NotifyStore from '../NotifyStore';
+import NotifyActions from '../NotifyActions';
 
 
 module.exports = React.createClass({

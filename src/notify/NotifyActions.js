@@ -1,9 +1,9 @@
-var constants = require('./constants');
-var Backbone = require('backbone');
+import constants from './constants';
+import Backbone from 'backbone';
 
 
 module.exports = {
-    hide: function() {
-        Backbone.trigger(constants.NOTIFY_HIDE);
-    }
+  hide: function() {
+    Backbone.trigger(constants.NOTIFY_HIDE);
+  }
 };

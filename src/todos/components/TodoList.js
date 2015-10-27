@@ -1,5 +1,5 @@
-var React = require('react');
-var TodoItem = require('./TodoItem');
+import React from 'react';
+import TodoItem from './TodoItem';
 
 
 module.exports = React.createClass({

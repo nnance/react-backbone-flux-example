@@ -1,12 +1,12 @@
-var React = require('react');
-var storeMixin = require('../../shared/helpers/storeMixin');
+import React from 'react';
+import storeMixin from '../../shared/helpers/storeMixin';
 
-var RouterActions = require('../../router/RouterActions');
-var FlickrActions = require('../FlickrActions');
-var FlickrStore = require('../FlickrStore');
+import RouterActions from '../../router/RouterActions';
+import FlickrActions from '../FlickrActions';
+import FlickrStore from '../FlickrStore';
 
-var FlickrForm = require('./FlickrForm');
-var FlickrList = require('./FlickrList');
+import FlickrForm from './FlickrForm';
+import FlickrList from './FlickrList';
 
 
 module.exports = React.createClass({

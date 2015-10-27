@@ -1,5 +1,5 @@
-var React = require('react');
-var RouterLink = require('../../router/components/RouterLink');
+import React from 'react';
+import RouterLink from '../../router/components/RouterLink';
 
 
 module.exports = React.createClass({

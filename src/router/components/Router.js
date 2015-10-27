@@ -1,6 +1,6 @@
-var React = require('react');
-var storeMixin = require('../../shared/helpers/storeMixin');
-var RouterStore = require('../RouterStore');
+import React from 'react';
+import storeMixin from '../../shared/helpers/storeMixin';
+import RouterStore from '../RouterStore';
 
 
 module.exports = React.createClass({

@@ -1,5 +1,5 @@
-var React = require('react');
-var TodoActions = require('../TodoActions');
+import React from 'react';
+import TodoActions from '../TodoActions';
 
 
 module.exports = React.createClass({

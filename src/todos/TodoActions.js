@@ -1,14 +1,20 @@
-var constants = require('./constants');
-var Backbone =require('backbone');
+import constants from './constants';
+import Backbone from 'backbone';
 
 module.exports = {
-    add: function(text) {
-        Backbone.trigger(constants.TODO_ADD, { text: text });
-    },
-    toggle: function(todo) {
-        Backbone.trigger(constants.TODO_TOGGLE, { todo: todo });
-    },
-    remove: function(todo) {
-        Backbone.trigger(constants.TODO_REMOVE, { todo: todo });
-    }
+  add: function(text) {
+    Backbone.trigger(constants.TODO_ADD, {
+      text: text
+    });
+  },
+  toggle: function(todo) {
+    Backbone.trigger(constants.TODO_TOGGLE, {
+      todo: todo
+    });
+  },
+  remove: function(todo) {
+    Backbone.trigger(constants.TODO_REMOVE, {
+      todo: todo
+    });
+  }
 };

@@ -5,17 +5,17 @@
  * @param {String} [events="add remove reset change"]
  */
 module.exports = function(store, events) {
-	if(!events) {
-		events = "add remove reset change";
-	}
-    return {
-        componentDidMount: function() {
-            store.on(events, function() {
-                this.forceUpdate();
-            }, this);
-        },
-        componentWillUnmount: function() {
-            store.off(null, null, this);
-        }
-    };
+  if (!events) {
+    events = "add remove reset change";
+  }
+  return {
+    componentDidMount: function() {
+      store.on(events, function() {
+        this.forceUpdate();
+      }, this);
+    },
+    componentWillUnmount: function() {
+      store.off(null, null, this);
+    }
+  };
 };

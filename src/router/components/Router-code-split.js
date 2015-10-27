@@ -2,11 +2,11 @@
  * this file contains logic for webpack code-splitting, based on the router
  * needs to be updated to react 0.12
  */
-var React = require('react');
-var process = require('process');
-var storeMixin = require('../../helpers/storeMixin');
-var constants = require('../constants');
-var RouterStore = require('../RouterStore');
+import React from 'react';
+import process from 'process';
+import storeMixin from '../../helpers/storeMixin';
+import constants from '../constants';
+import RouterStore from '../RouterStore';
 
 
 module.exports = React.createClass({

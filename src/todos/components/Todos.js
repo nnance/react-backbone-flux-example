@@ -1,10 +1,10 @@
-var React = require('react');
-var storeMixin = require('../../shared/helpers/storeMixin');
-var TodoActions = require('../TodoActions');
-var TodoStore = require('../TodoStore');
+import React from 'react';
+import storeMixin from '../../shared/helpers/storeMixin';
+import TodoActions from '../TodoActions';
+import TodoStore from '../TodoStore';
 
-var TodoForm = require('./TodoForm');
-var TodoList = require('./TodoList');
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
 
 
 module.exports = React.createClass({

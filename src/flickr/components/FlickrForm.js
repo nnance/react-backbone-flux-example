@@ -1,5 +1,5 @@
-var React = require('react');
-var SingleInputForm = require('../../shared/components/SingleInputForm');
+import React from 'react';
+import SingleInputForm from '../../shared/components/SingleInputForm';
 
 
 module.exports = React.createClass({

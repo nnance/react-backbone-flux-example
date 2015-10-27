@@ -1,5 +1,5 @@
-var React = require('react');
-var RouterActions = require('../RouterActions');
+import React from 'react';
+import RouterActions from '../RouterActions';
 
 
 module.exports = React.createClass({
