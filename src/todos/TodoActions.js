@@ -16,5 +16,10 @@ module.exports = {
     Backbone.trigger(constants.TODO_REMOVE, {
       todo: todo
     });
+  },
+  filter: function(value) {
+    Backbone.trigger(constants.TODO_FILTER, {
+      filter: value
+    });
   }
 };
