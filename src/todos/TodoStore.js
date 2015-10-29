@@ -2,6 +2,8 @@ import Backbone from 'backbone';
 import constants from './constants';
 
 
+var events = 'add remove reset change';
+
 var Todo = Backbone.Model.extend({
   defaults: {
     text: "Default todo text",
@@ -44,49 +46,21 @@ class TodoCollection extends Backbone.Collection {
   }
 }
 
-class TodoFilter extends Backbone.Collection {
+class TodoFilter extends Backbone.Model {
+  get defaults() {
+    return {
+      filter: 'all',
+      todos: new TodoCollection()
+    }
+  }
+
   initialize() {
-    super.initialize();
-
-    this.filter = 'all';
-    this.collection = new TodoCollection();
-    this.listenTo(this.collection, 'add', this.addTodo);
-    this.listenTo(this.collection, 'remove', this.removeTodo);
-    this.listenTo(this.collection, 'change', this.applyFilter);
     this.listenTo(Backbone, constants.TODO_FILTER, this.setFilter);
+    this.listenTo(this.get('todos'), events, this.trigger.bind(this, 'change'));
   }
 
-  shouldBeFiltered(todo) {
-    if ((this.filter === 'active') && todo.get('complete')) {
-      return true;
-    } else if ((this.filter === 'completed') && !todo.get('complete')) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  addTodo(todo) {
-    if (!shouldBeFiltered(todo)) {
-      this.add(todo);
-    }
-  }
-
-  removeTodo(todo) {
-    this.remove(todo);
-  }
-
-  setFilter(value) {
-    this.filter = value;
-    this.applyFilter();
-  }
-
-  applyFilter() {
-    this.set(
-      this.collection.filter(
-        this.shouldBeFiltered.bind(this)
-      )
-    );
+  setFilter(action) {
+    this.set({filter: action.filter});
   }
 }
 

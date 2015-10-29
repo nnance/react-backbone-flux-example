@@ -11,9 +11,19 @@ module.exports = React.createClass({
     mixins: [storeMixin(TodoStore)],
 
     getInitialState: function() {
-        return { TodoStore: TodoStore };
+      return TodoStore.attributes;
     },
 
+    // componentDidMount: function() {
+    //   TodoStore.on('add remove change reset', function() {
+    //     this.replaceState(TodoStore.attributes);
+    //   }, this);
+    // },
+    //
+    // componentWillUnmount: function() {
+    //   TodoStore.off(null, null, this);
+    // },
+    //
     onAdd: function(text) {
         TodoActions.add(text);
     },
@@ -21,9 +31,12 @@ module.exports = React.createClass({
     render: function() {
         return <div>
             <TodoForm onAdd={this.onAdd} />
-            <TodoFilter />
+            <TodoFilter filter={this.state.filter}/>
             <hr/>
-            <TodoList TodoStore={this.state.TodoStore} />
+            <TodoList
+              todos={this.state.todos}
+              filter={this.state.filter}
+               />
         </div>
     }
 });
