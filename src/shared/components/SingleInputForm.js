@@ -13,7 +13,7 @@ module.exports = React.createClass({
     },
 
     onChange: function() {
-        this.setState({ value: this.refs.input.getDOMNode().value });
+        this.setState({ value: this.refs.input.value });
     },
 
     onSubmit: function(ev) {
