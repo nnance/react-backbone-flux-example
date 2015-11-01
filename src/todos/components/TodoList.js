@@ -1,25 +1,23 @@
 import React from 'react';
 import TodoItem from './TodoItem';
 
-function shouldBeFiltered(filter, todo) {
+function shouldShow(filter, todo) {
   if ((filter === 'active') && todo.get('complete')) {
-    return true;
-  } else if ((filter === 'completed') && !todo.get('complete')) {
-    return true;
-  } else {
     return false;
+  } else if ((filter === 'completed') && !todo.get('complete')) {
+    return false;
+  } else {
+    return true;
   }
 }
 
 module.exports = React.createClass({
-
   render: function() {
     return <ul className='list-unstyled'>
-      {this.props.todos.map(function (todo) {
-        if (!shouldBeFiltered(this.props.filter, todo)) {
-          return <li key={todo.cid}><TodoItem todo={todo} /></li>
-        }
-      }.bind(this))}
+      {this.props.todos
+        .filter(shouldShow.bind(this, this.props.filter))
+        .map((todo) => <li key={todo.cid}><TodoItem todo={todo} /></li>)
+      }
     </ul>
   }
 });
