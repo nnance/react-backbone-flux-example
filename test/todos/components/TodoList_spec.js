@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import React from 'react/addons';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import Backbone from 'backbone';
 import TodoList from '../../../src/todos/components/TodoList';
-import sd from 'skin-deep';
 
 describe('TodoList component', function() {
-  let tree, vdom, instance;
+  let instance;
   let props = {
     filter: 'all',
     todos: new Backbone.Collection([{
@@ -19,50 +19,40 @@ describe('TodoList component', function() {
 
   describe('When displaying all todos', function(){
     beforeEach(function() {
-      tree = sd.shallowRender(React.createElement(TodoList, props));
-      instance = tree.getMountedInstance();
-      vdom = tree.getRenderOutput();
+      instance = TestUtils.renderIntoDocument(<TodoList
+        todos={props.todos}
+        filter={props.filter}/>
+      );
     });
 
     it('should render a list with 2 items', function() {
-      const expectedChildren = [
-        React.DOM.h2({
-          className: 'Post-header',
-          onClick: instance.doSomethingOnClick
-        }, 'Title'),
-        React.DOM.p({
-          className: 'Post-content'
-        }, 'Content')
-      ];
+      const el = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'ul');
+      const entries = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
-      expect(vdom.type).to.equal('ul');
-      expect(vdom.props.className).to.contain('list-unstyled');
-      expect(vdom.props.children.length).to.equal(2);
-      // expect(vdom.props.children).to.deep.equal(expectedChildren);
-    });
-  });
-
-  describe('When filtering active todos', function(){
-    beforeEach(function() {
-      props.filter = 'active';
-      tree.reRender(React.createElement(TodoList, props));
-      vdom = tree.getRenderOutput();
+      expect(el.length).to.be.equal(1);
+      expect(entries.length).to.equal(2);
     });
 
-    it('should render a list with 1 item', function(){
-      expect(vdom.props.children.length).to.equal(1);
-    });
-  });
+    describe('When filtering active todos', function(){
+      beforeEach(function() {
+        instance.setProps({filter: 'active'});
+      });
 
-  describe('When filtering complete todos', function(){
-    beforeEach(function() {
-      instance.setState({filter: 'completed'});
-      tree.reRender(React.createElement(TodoList, props));
-      vdom = tree.getRenderOutput();
+      it('should render a list with 1 item', function(){
+        const entries = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+        expect(entries.length).to.equal(1);
+      });
     });
 
-    it('should render a list with 1 item', function(){
-      expect(vdom.props.children.length).to.equal(1);
+    describe('When filtering complete todos', function(){
+      beforeEach(function() {
+        instance.setProps({filter: 'completed'});
+      });
+
+      it('should render a list with 1 item', function(){
+        const entries = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+        expect(entries.length).to.equal(1);
+      });
     });
   });
 });
