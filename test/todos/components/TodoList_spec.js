@@ -1,27 +1,29 @@
 import { expect } from 'chai';
 import React from 'react';
+import jsdom from 'jsdom';
 import TestUtils from 'react-addons-test-utils';
 import Backbone from 'backbone';
 import TodoList from '../../../src/todos/components/TodoList';
 
 describe('TodoList component', function() {
   let instance;
-  let props = {
-    filter: 'all',
-    todos: new Backbone.Collection([{
+  let filter = new Backbone.Model({
+    'filter': 'all'
+  });
+  let todos = new Backbone.Collection([{
       text: 'active',
       complete: false
     }, {
       test: 'complete',
       complete: true
-    }])
-  };
+    }
+  ]);
 
   describe('When displaying all todos', function(){
     beforeEach(function() {
       instance = TestUtils.renderIntoDocument(<TodoList
-        todos={props.todos}
-        filter={props.filter}/>
+        collection={todos}
+        model={filter}/>
       );
     });
 
@@ -35,7 +37,7 @@ describe('TodoList component', function() {
 
     describe('When filtering active todos', function(){
       beforeEach(function() {
-        instance.setProps({filter: 'active'});
+        filter.set({filter: 'active'});
       });
 
       it('should render a list with 1 item', function(){
@@ -46,7 +48,7 @@ describe('TodoList component', function() {
 
     describe('When filtering complete todos', function(){
       beforeEach(function() {
-        instance.setProps({filter: 'completed'});
+        filter.set({filter: 'completed'});
       });
 
       it('should render a list with 1 item', function(){

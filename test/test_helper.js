@@ -1,13 +1,7 @@
 import jsdom from 'jsdom';
 
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
-const win = doc.defaultView;
-
-global.document = doc;
-global.window = win;
-
-Object.keys(window).forEach((key) => {
-  if (!(key in global)) {
-    global[key] = window[key];
-  }
-});
+// A super simple DOM ready for React to render into
+// Store this DOM and the window in global scope ready for React to access
+global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
+global.window = document.parentWindow;
