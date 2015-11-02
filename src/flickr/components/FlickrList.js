@@ -1,14 +1,15 @@
 import React from 'react';
+import backboneConnection from '../../shared/backboneConnection';
 
 
-module.exports = React.createClass({
+var FlickrList = React.createClass({
     render: function() {
-        if(this.props.FlickrStore.size() === 0) {
+        if(this.props.collection.size() === 0) {
             return <p>No results.</p>
         }
 
         return <ul className='list-inline'>
-            {this.props.FlickrStore.map((result)=>
+            {this.props.collection.map((result)=>
                 <li key={result.cid}>
                     <img className="img-thumbnail" src={result.getPhoto()} />
                 </li>
@@ -16,3 +17,5 @@ module.exports = React.createClass({
         </ul>
     }
 });
+
+module.exports = backboneConnection(FlickrList);

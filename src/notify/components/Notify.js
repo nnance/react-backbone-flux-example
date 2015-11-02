@@ -1,12 +1,10 @@
 import React from 'react';
-import storeMixin from '../../shared/helpers/storeMixin';
+import backboneConnection from '../../shared/backboneConnection';
 import NotifyStore from '../NotifyStore';
 import NotifyActions from '../NotifyActions';
 
 
-module.exports = React.createClass({
-    mixins: [storeMixin(NotifyStore)],
-
+var Notify = React.createClass({
     getInitialState: function() {
         return NotifyStore;
     },
@@ -31,3 +29,5 @@ module.exports = React.createClass({
         return null;
     }
 });
+
+module.exports = backboneConnection(Notify, [NotifyStore])

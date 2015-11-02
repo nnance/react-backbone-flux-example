@@ -4,14 +4,12 @@
  */
 import React from 'react';
 import process from 'process';
-import storeMixin from '../../helpers/storeMixin';
+import backboneConnection from '../../shared/backboneConnection';
 import constants from '../constants';
 import RouterStore from '../RouterStore';
 
 
-module.exports = React.createClass({
-    mixins: [storeMixin(RouterStore)],
-
+var RouterCodeSplit = React.createClass({
     getInitialState: function() {
         return {
             RouterStore: RouterStore,
@@ -63,3 +61,5 @@ module.exports = React.createClass({
         return this.getBodyComponent();
     }
 });
+
+module.exports = backboneConnection(RouterCodeSplit, [RouterStore]);

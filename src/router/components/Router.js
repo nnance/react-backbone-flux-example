@@ -1,11 +1,9 @@
 import React from 'react';
-import storeMixin from '../../shared/helpers/storeMixin';
+import backboneConnection from '../../shared/backboneConnection';
 import RouterStore from '../RouterStore';
 
 
-module.exports = React.createClass({
-    mixins: [storeMixin(RouterStore)],
-
+var Router = React.createClass({
     getInitialState: function() {
         return { RouterStore: RouterStore };
     },
@@ -34,3 +32,5 @@ module.exports = React.createClass({
         return <Component {...props} />;
     }
 });
+
+module.exports = backboneConnection(Router, [RouterStore]);

@@ -1,5 +1,4 @@
 import React from 'react';
-import storeMixin from '../../shared/helpers/storeMixin';
 
 import RouterActions from '../../router/RouterActions';
 import FlickrActions from '../FlickrActions';
@@ -10,14 +9,6 @@ import FlickrList from './FlickrList';
 
 
 module.exports = React.createClass({
-    mixins: [storeMixin(FlickrStore)],
-
-    getInitialState: function() {
-        return {
-            FlickrStore: FlickrStore
-        };
-    },
-
     componentDidMount: function() {
         if(this.props.routeParams && this.props.routeParams[0]) {
             FlickrActions.find(this.props.routeParams[0]);
@@ -37,7 +28,7 @@ module.exports = React.createClass({
     render: function() {
         return <div>
             <FlickrForm onSearch={this.onSearch} value={this.props.routeParams[0]} />
-            <FlickrList FlickrStore={this.state.FlickrStore} />
+            <FlickrList collection={FlickrStore} />
         </div>
     }
 });

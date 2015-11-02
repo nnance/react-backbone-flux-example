@@ -1,5 +1,5 @@
 import React from 'react';
-import backboneConnection from '../../shared/helpers/backboneConnection';
+import backboneConnection from '../../shared/backboneConnection';
 import TodoItem from './TodoItem';
 
 function shouldShow(filter, todo) {

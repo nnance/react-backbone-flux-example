@@ -10,9 +10,8 @@ var FlickrResult = Backbone.Model.extend({
 
 
 class FlickrCollection extends Backbone.Collection {
-  constructor() {
-    super();
-    this.model = FlickrResult;
+  get model() {
+    return FlickrResult;
   }
 
   initialize() {
