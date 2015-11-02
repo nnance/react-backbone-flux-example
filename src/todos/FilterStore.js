@@ -3,11 +3,10 @@ import constants from './constants';
 
 
 class TodoFilter extends Backbone.Model {
-  constructor() {
-    super();
-    this.defauilts = {
-      filter: 'all'
-    };
+  get defaults() {
+    return {
+      filter: 'all',
+    }
   }
 
   initialize() {

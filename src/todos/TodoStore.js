@@ -46,22 +46,4 @@ class TodoCollection extends Backbone.Collection {
   }
 }
 
-class TodoFilter extends Backbone.Model {
-  get defaults() {
-    return {
-      filter: 'all',
-      todos: new TodoCollection()
-    }
-  }
-
-  initialize() {
-    this.listenTo(Backbone, constants.TODO_FILTER, this.setFilter);
-    this.listenTo(this.get('todos'), events, this.trigger.bind(this, 'change'));
-  }
-
-  setFilter(action) {
-    this.set({filter: action.filter});
-  }
-}
-
-module.exports = new TodoFilter();
+module.exports = new TodoCollection();
