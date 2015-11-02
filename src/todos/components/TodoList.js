@@ -1,4 +1,5 @@
 import React from 'react';
+import backboneConnection from '../../shared/helpers/backboneConnection';
 import TodoItem from './TodoItem';
 
 function shouldShow(filter, todo) {
@@ -11,13 +12,16 @@ function shouldShow(filter, todo) {
   }
 }
 
-module.exports = React.createClass({
+var TodoList = React.createClass({
   render: function() {
+    var filter = this.props.model.get('filter');
     return <ul className='list-unstyled'>
-      {this.props.todos
-        .filter(shouldShow.bind(this, this.props.filter))
+      {this.props.collection
+        .filter(shouldShow.bind(this, filter))
         .map((todo) => <li key={todo.cid}><TodoItem todo={todo} /></li>)
       }
     </ul>
   }
 });
+
+module.exports = backboneConnection(TodoList);
