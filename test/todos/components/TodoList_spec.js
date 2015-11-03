@@ -1,9 +1,10 @@
 import { expect } from 'chai';
 import React from 'react';
-import jsdom from 'jsdom';
+import bro from 'jsdom-test-browser';
 import TestUtils from 'react-addons-test-utils';
 import Backbone from 'backbone';
 import TodoList from '../../../src/todos/components/TodoList';
+
 
 describe('TodoList component', function() {
   let instance;
@@ -18,6 +19,8 @@ describe('TodoList component', function() {
       complete: true
     }
   ]);
+
+  before(function (done) { bro.newBrowser(done); });
 
   describe('When displaying all todos', function(){
     beforeEach(function() {
