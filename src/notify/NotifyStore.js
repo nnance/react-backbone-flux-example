@@ -3,9 +3,8 @@ import Backbone from 'backbone';
 import FlickrConstants from '../flickr/constants';
 
 class NotifyStore extends Backbone.Model {
-  constructor() {
-    super();
-    this.default = {
+  get defaults() {
+    return = {
       text: null,
       visible: false,
       closable: true
